@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Section 4 Function</title>
+</head>
+<body>
+    <h1>Tugas Section 4 Function</h1>
+    <script>
+        // Mendefinisikan objek person
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            // Definisikan metode greet sebagai metode objek
+            greet: function() {
+                return "Hello, " + this.firstName + " " + this.lastName + "!";
+            }
+        };
+
+        // Memanggil metode greet dari objek person dan menampilkan hasilnya dalam sebuah alert
+        alert(person.greet());
+    </script>
+</body>
+</html>
