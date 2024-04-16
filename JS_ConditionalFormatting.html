@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Formatting Example</title>
+</head>
+<body>
+    <h1>Conditional Formatting Example</h1>
+    <label for="x">Masukkan nilai x:</label>
+    <input type="number" id="xInput"><br><br>
+    <label for="y">Masukkan nilai y:</label>
+    <input type="number" id="yInput"><br><br>
+    <button onclick="checkValues()">Check</button> <!-- Tombol untuk memeriksa nilai -->
+
+    <script>
+        function checkValues() {
+            // Mengambil nilai x dan y dari input
+            var x = parseInt(document.getElementById("xInput").value); // parseint() mengubah string menjadi Integer
+            var y = parseInt(document.getElementById("yInput").value);
+
+            // Memeriksa apakah nilai x lebih besar dari y
+            if (x > y) {
+                alert("Saya Bisa!"); // Jika x lebih besar dari y, munculkan pesan "Saya Bisa!"
+            } else if (x === y) {
+                alert("Nilai x dan y sama."); // Jika x sama dengan y, munculkan pesan "Nilai x dan y sama."
+            } else {
+                alert("Nilai y lebih besar dari atau sama dengan x."); // Jika y lebih besar dari atau sama dengan x, munculkan pesan "Nilai y lebih besar dari atau sama dengan x."
+            }
+        }
+    </script>
+</body>
+</html>
