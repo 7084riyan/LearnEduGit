@@ -1,0 +1,10 @@
+{
+"username": "standard_user",
+"password": "secret_sauce",
+"productToSearch": "Backpack",
+"checkoutInfo": {
+    "firstName": "Edu",
+    "lastName": "Work",
+    "zipCode": "90210"
+    }
+}
