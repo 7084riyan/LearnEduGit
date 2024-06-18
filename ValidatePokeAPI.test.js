@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('validate pokeAPI', () => {
+describe('validate full Section pokeAPI', () => {
     it('validate header', () => {
         cy.request('https://pokeapi.co/api/v2/pokemon/ditto').as('pokemon')
         cy.get('@pokemon').its('headers').its('content-type')
