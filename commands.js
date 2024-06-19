@@ -1,65 +1,19 @@
-// Custom commands in `commands.js`
-Cypress.Commands.add("login", () => {
-  cy.fixture("saucedemoData").then((data) => {
-    cy.get("#user-name").clear().type(data.username);
-    cy.get("#password").clear().type(data.password);
-    cy.get("#login-button").click();
-  });
-});
-
-Cypress.Commands.add("addProductToCart", (productName) => {
-  cy.contains(".inventory_item_name", productName)
-    .parents(".inventory_item")
-    .find(".btn_inventory")
-    .click();
-});
-
-Cypress.Commands.add("verifyCartContents", (products) => {
-  cy.get(".shopping_cart_link").click();
-  products.forEach((product) => {
-    cy.get(".cart_item").contains(product);
-  });
-});
-
-Cypress.Commands.add("completeCheckout", () => {
-  cy.fixture("saucedemoData").then((data) => {
-    cy.get(".shopping_cart_link").click();
-    cy.get(".checkout_button").click();
-    cy.get("#first-name").type(data.checkoutInfo.firstName);
-    cy.get("#last-name").type(data.checkoutInfo.lastName);
-    cy.get("#postal-code").type(data.checkoutInfo.zipCode);
-    cy.get(".cart_button").click();
-    cy.get('[data-test="finish"]').click();
-    cy.get(".complete-header").should("contain", "Thank you for your order!");
-  });
-});
-
-Cypress.Commands.add("logout", () => {
-  cy.get("#react-burger-menu-btn").click();
-  cy.get("#logout_sidebar_link").click();
-  cy.get('[data-test="login-button"]').contains("Login");
-});
-
-Cypress.Commands.add("NegativeLogin", () => {
-  cy.get("#user-name").clear().type("locked_out_user");
-  cy.get("#password").clear().type("secret_sauce");
-  cy.get("#login-button").click();
-  cy.get('[data-test="error"]').contains(
-    "Epic sadface: Sorry, this user has been locked out.",
-  );
-});
-
-Cypress.Commands.add('loginViaAPI', (
-  email = Cypress.env('userEmail'),
-  password = Cypress.env('userPassword')
-) => {
-  cy.request('POST', `${Cypress.env('apiUrl')}/users/login`, {
-    username: email,
-    password,
+Cypress.Commands.add('loginViaAPI', () => {
+  return cy.request({
+    method: 'POST',
+    url: 'https://kasir-api.belajarqa.com/authentications',
+    body: {
+      "email": "sanber123@mail.com",
+      "password": "sanber123@"
+    },
+    failOnStatusCode: false
   }).then((response) => {
-    cy.setCookie('sessionId', response.body.sessionId)
-    cy.setCookie('userId', response.body.userId)
-    cy.setCookie('userName', response.body.userName)
-    cy.visit('/#!/main')
-  })
-})
+    // Set cookies
+    cy.setCookie('accessToken', response.body.data.accessToken);
+    cy.setCookie('userId', response.body.data.user.id);
+    cy.setCookie('userName', response.body.data.user.name);
+
+    // Use another then to return the response after setting cookies
+    return cy.wrap(response);
+  });
+});
