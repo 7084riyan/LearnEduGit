@@ -1,3 +1,7 @@
+// Custom commands in `commands.js`
+export default function addCustomCommands() {
+  // all the Cypress.Commands.add calls
+}
 Cypress.Commands.add('loginViaAPI', () => {
   return cy.request({
     method: 'POST',
@@ -17,3 +21,4 @@ Cypress.Commands.add('loginViaAPI', () => {
     return cy.wrap(response);
   });
 });
+
